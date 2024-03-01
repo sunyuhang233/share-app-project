@@ -1,0 +1,65 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /share-app-api
+
+spring:
+  application:
+    name: share-app-api
+  profiles:
+    active: dev
+  mvc:
+    path-match:
+      matching-strategy: ant_path_matcher #??
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  type-aliases-package: top.ssy.*.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: true # ????????????(since 3.3.0,????????????2)
+      logic-delete-value: 1 # ??????(??? 1)
+      logic-not-delete-value: 0 # ??????(??? 0)
+
+logging:
+  config: classpath:log/logback-spring.xml
+
+# springdoc-openapi????
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: top.ssy.controller
+# knife4j???????????????
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+  basic:
+    enable: true    #??????
+    username: admin   #???
+    password: 123456  #??
+
+
+auth:
+  ignore_urls:
+    - /sys/auth/**
+    - /actuator/**
+    - /v3/api-docs/**
+    - /webjars/**
+    - /swagger/**
+    - /swagger-resources/**
+    - /swagger-ui.html
+    - /swagger-ui/**
+    - /doc.html
+    - /
