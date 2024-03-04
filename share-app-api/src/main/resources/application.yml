@@ -39,7 +39,7 @@ springdoc:
   group-configs:
     - group: 'default'
       paths-to-match: '/**'
-      packages-to-scan: top.ssy.controller
+      packages-to-scan: top.ssy.share.app.controller
 # knife4j???????????????
 knife4j:
   enable: true
@@ -62,4 +62,26 @@ auth:
     - /swagger-ui.html
     - /swagger-ui/**
     - /doc.html
+    - /test
     - /
+
+aliyun:
+  oss:
+    # oss对外服务的访问域名
+    endpoint: oss-cn-nanjing.aliyuncs.com
+    # 访问身份验证中用到用户标识
+    accessKeyId: LTAI
+    # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
+    accessKeySecret: FKCa
+    # oss的存储空间
+    bucketName: FKCa
+
+share:
+  sms:
+    ccp:
+      serverIp: app.cloopen.com
+      port: 8883
+      accountSId: 2c94811c8b1e335b018c3811b29e4086
+      accountToken: 142174974ad842c58275bc14d26cdb3c
+      appId: 2c94811c8b1e335b018c3811b417408d
+      templateId: 1
