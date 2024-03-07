@@ -25,6 +25,8 @@
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <aliyun-sdk-oss.version>3.17.0</aliyun-sdk-oss.version>
         <commons-fileupload.version>2.0.0-M1</commons-fileupload.version>
+        <cloopen.sms.version>1.0.4</cloopen.sms.version>
+
 
     </properties>
     <dependencies>
@@ -128,6 +130,13 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-fileupload2-jakarta</artifactId>
             <version>${commons-fileupload.version}</version>
+        </dependency>
+
+        <!-- 第三方短信 -->
+        <dependency>
+            <groupId>com.cloopen</groupId>
+            <artifactId>java-sms-sdk</artifactId>
+            <version>${cloopen.sms.version}</version>
         </dependency>
     </dependencies>
 

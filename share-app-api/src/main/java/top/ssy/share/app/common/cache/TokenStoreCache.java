@@ -3,7 +3,7 @@ package top.ssy.share.app.common.cache;
 import com.alibaba.fastjson2.JSON;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import top.ssy.share.app.vo.UserInfoVO;
+import top.ssy.share.app.vo.UserLoginVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,19 +16,19 @@ import java.util.List;
 public class TokenStoreCache {
     private final RedisCache redisCache;
 
-    public void saveUser(String accessToken, UserInfoVO user) {
+    public void saveUser(String accessToken, UserLoginVO user) {
         String accessTokenKey = RedisKeys.getAccessTokenKey(accessToken);
-        String managerIdKey = RedisKeys.getManagerIdKey(user.getPkId());
+        String managerIdKey = RedisKeys.getUserIdKey(user.getPkId());
         if (redisCache.get(managerIdKey) != null) {
             redisCache.delete(String.valueOf(redisCache.get(managerIdKey)));
         }
-        redisCache.set(managerIdKey, accessTokenKey);
+        redisCache.set(managerIdKey, accessToken);
         redisCache.set(accessTokenKey, user);
     }
 
-    public UserInfoVO getUser(String accessToken) {
+    public UserLoginVO getUser(String accessToken) {
         String key = RedisKeys.getAccessTokenKey(accessToken);
-        return JSON.to(UserInfoVO.class, redisCache.get(key));
+        return JSON.to(UserLoginVO.class, redisCache.get(key));
     }
 
     public void deleteUser(String accessToken) {
@@ -37,7 +37,7 @@ public class TokenStoreCache {
     }
 
     public void deleteUserById(Integer id) {
-        String managerIdKey = RedisKeys.getManagerIdKey(id);
+        String managerIdKey = RedisKeys.getUserIdKey(id);
         String key = String.valueOf(redisCache.get(managerIdKey));
         redisCache.delete(key);
     }
@@ -45,7 +45,7 @@ public class TokenStoreCache {
     public void deleteUserByIds(List<Integer> ids) {
         List<String> keys = new ArrayList<>();
         for (Integer id : ids) {
-            String managerIdKey = RedisKeys.getManagerIdKey(id);
+            String managerIdKey = RedisKeys.getUserIdKey(id);
             String key = String.valueOf(redisCache.get(managerIdKey));
             keys.add(key);
         }

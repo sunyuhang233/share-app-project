@@ -1,11 +1,13 @@
 package top.ssy.share.app.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,16 +22,19 @@ import java.util.List;
 @Setter
 @ToString
 @TableName(value = "t_resource", autoResultMap = true)
-public class Resource {
+public class Resource  implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -7118493289943684477L;
 
     @TableId(value = "pk_id", type = IdType.AUTO)
     private Integer pkId;
     private String title;
     private Integer author;
     private Integer diskType;
-    @TableField(typeHandler = FastjsonTypeHandler.class)
+    @TableField(typeHandler = JacksonTypeHandler.class)
     private List<Integer> resType;
-    @TableField(typeHandler = FastjsonTypeHandler.class)
+    @TableField(typeHandler = JacksonTypeHandler.class)
     private List<Integer> tags;
     private String downloadUrl;
     private String detail;

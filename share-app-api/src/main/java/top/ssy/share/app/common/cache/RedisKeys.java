@@ -8,8 +8,8 @@ public class RedisKeys {
     /**
      * 验证码Key
      */
-    public static String getCaptchaKey(String phone) {
-        return "sys:captcha:" + phone;
+    public static String getSmsKey(String phone) {
+        return "sms:captcha:" + phone;
     }
 
     /**
@@ -19,8 +19,19 @@ public class RedisKeys {
         return "sys:access:" + accessToken;
     }
 
-    public static String getManagerIdKey(Integer id) {
-        return "sys:user:" + id;
+
+    /**
+     * 获取用户 ID 密钥
+     *
+     * @param id id
+     * @return {@link String}
+     */
+    public static String getUserIdKey(Integer id) {
+        return "sys:user:id:" + id;
+    }
+
+    public static String getUserInfoKey(Integer id) {
+        return "sys:user:info:" + id;
     }
 
 }

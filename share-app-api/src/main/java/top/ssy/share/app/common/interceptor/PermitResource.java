@@ -19,13 +19,13 @@ import java.util.Properties;
 @Component
 public class PermitResource {
     /**
-     * 指定被 过滤器 忽略的URL
+     * 指定被 过滤器 检查的URL
      */
     @SneakyThrows
-    public List<String> getPermitList() {
+    public List<String> getValidList() {
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         Resource[] resources = resolver.getResources("classpath*:application.yml");
-        String key = "auth.ignore_urls";
+        String key = "auth.valid_urls";
 
         return getPropertiesList(key, resources);
     }

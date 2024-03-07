@@ -19,4 +19,8 @@ public interface UserMapper extends BaseMapper<User> {
         return this.selectOne(new LambdaQueryWrapper<User>().eq(User::getPhone, phone));
     }
 
+    default User getByWxOpenId(String openId) {
+        return this.selectOne(new LambdaQueryWrapper<User>().eq(User::getWxOpenId, openId));
+    }
+
 }

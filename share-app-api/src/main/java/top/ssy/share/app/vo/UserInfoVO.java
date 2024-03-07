@@ -20,5 +20,24 @@ public class UserInfoVO implements Serializable {
     @Serial
     private static final long serialVersionUID = -45095106764580159L;
 
+    @Schema(name = "主键")
     private Integer pkId;
+    @Schema(name = "手机号")
+    private String phone;
+    @Schema(name = "微信openId")
+    private String wxOpenId;
+    @Schema(name = "头像")
+    private String avatar;
+    @Schema(name = "昵称")
+    private String nickname;
+    @Schema(name = "性别")
+    private Integer gender;
+    @Schema(name = "积分")
+    private Integer bonus;
+    @Schema(name = "生日")
+    private String birthday;
+    @Schema(name = "描述")
+    private String remark;
+    @Schema(name = "今日是否签到")
+    private Boolean isDailyCheck;
 }

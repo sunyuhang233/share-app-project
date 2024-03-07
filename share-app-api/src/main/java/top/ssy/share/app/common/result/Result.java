@@ -8,15 +8,15 @@ import top.ssy.share.app.common.exception.ErrorCode;
  * @author ycshang
  */
 @Data
-@Schema(description = "响应数据")
+@Schema(name = "响应数据")
 public class Result<T> {
-    @Schema(description = "编码 0表示成功，其他值表示失败")
+    @Schema(name = "编码 0表示成功，其他值表示失败")
     private int code = 0;
 
-    @Schema(description = "消息内容")
+    @Schema(name = "消息内容")
     private String msg = "success";
 
-    @Schema(description = "响应数据")
+    @Schema(name = "响应数据")
     private T data;
 
     public static <T> Result<T> ok() {

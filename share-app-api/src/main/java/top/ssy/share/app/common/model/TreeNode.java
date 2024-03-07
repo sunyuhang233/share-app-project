@@ -21,18 +21,18 @@ public class TreeNode<T> implements Serializable {
     /**
      * 主键
      */
-    @Schema(description = "id")
+    @Schema(name = "id")
     private Integer pkId;
     /**
      * 上级ID
      */
-    @Schema(description = "上级ID")
+    @Schema(name = "上级ID")
     @NotNull(message = "上级ID不能为空")
     private Integer parentId;
     /**
      * 子节点列表
      */
-    @Schema(description = "子集")
+    @Schema(name = "子集")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<T> children = new ArrayList<>();
 }

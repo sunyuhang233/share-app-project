@@ -13,7 +13,7 @@ import top.ssy.share.app.common.exception.ErrorCode;
 import top.ssy.share.app.common.exception.ServerException;
 import top.ssy.share.app.service.AuthService;
 import top.ssy.share.app.utils.TokenUtils;
-import top.ssy.share.app.vo.UserInfoVO;
+import top.ssy.share.app.vo.UserLoginVO;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,22 +31,13 @@ public class TokenInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        MyRequestWrapper myRequestWrapper = null;
-        try {
-            myRequestWrapper = new MyRequestWrapper(request);
-        } catch (IOException e) {
-            log.error("get request body exception", e);
-            throw new ServerException("参数异常");
-        }
-        log.info(getIp(myRequestWrapper) + myRequestWrapper.getRequestURI() + readAsChars(myRequestWrapper));
-
         // 获取token
-        String accessToken = TokenUtils.getAccessToken(myRequestWrapper);
+        String accessToken = TokenUtils.getAccessToken(request);
         if (StringUtils.isBlank(accessToken)) {
             throw new ServerException(ErrorCode.UNAUTHORIZED);
         }
         // 验证用户是否可用
-        UserInfoVO user = tokenStoreCache.getUser(accessToken);
+        UserLoginVO user = tokenStoreCache.getUser(accessToken);
         if (ObjectUtils.isEmpty(user)) {
             throw new ServerException(ErrorCode.LOGIN_STATUS_EXPIRE);
         }

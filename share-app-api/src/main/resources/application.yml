@@ -52,18 +52,10 @@ knife4j:
 
 
 auth:
-  ignore_urls:
-    - /sys/auth/**
-    - /actuator/**
-    - /v3/api-docs/**
-    - /webjars/**
-    - /swagger/**
-    - /swagger-resources/**
-    - /swagger-ui.html
-    - /swagger-ui/**
-    - /doc.html
-    - /test
-    - /
+  valid_urls:
+    - /auth/logout
+    - /user/**
+    - /resource/publish
 
 aliyun:
   oss:
@@ -72,16 +64,16 @@ aliyun:
     # 访问身份验证中用到用户标识
     accessKeyId: LTAI
     # 用户用于加密签名字符串和oss用来验证签名字符串的密钥
-    accessKeySecret: FKCa
+    accessKeySecret: kmSs
     # oss的存储空间
-    bucketName: FKCa
+    bucketName: flo
 
 share:
   sms:
     ccp:
       serverIp: app.cloopen.com
       port: 8883
-      accountSId: 2c94811c8b1e335b018c3811b29e4086
-      accountToken: 142174974ad842c58275bc14d26cdb3c
-      appId: 2c94811c8b1e335b018c3811b417408d
+      accountSId: 2c94811c8cd4da0a018e07b6f8892dc6
+      accountToken: 9e43777038eb4001a25a416995eda92a
+      appId: 2c94811c8cd4da0a018e07b6fa0a2dcd
       templateId: 1
