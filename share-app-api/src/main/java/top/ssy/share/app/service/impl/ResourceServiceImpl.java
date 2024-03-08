@@ -30,6 +30,7 @@ import top.ssy.share.app.vo.ResourceDetailVO;
 import top.ssy.share.app.vo.ResourceListItemVO;
 import top.ssy.share.app.vo.UserActionListInfo;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -145,7 +146,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
         UserActionListInfo userActionListInfo = userActionService
                 .selectResourceListByUserIdAndType(userId, UserActionEnum.getByCode(query.getType()), new Page<UserAction>(query.getPage(), query.getLimit()));
         if (userActionListInfo.getTotal() == 0) {
-            return new PageResult<>(null, 0);
+            return new PageResult<>(Collections.emptyList(), 0);
         }
         List<Resource> records = baseMapper.selectBatchIds(userActionListInfo.getResourceIdList());
         List<ResourceListItemVO> voList = records.stream().map(resource -> {

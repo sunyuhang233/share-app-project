@@ -17,7 +17,7 @@ public interface CommonService {
      *
      * @param phone                电话
      */
-    String sendSms(String phone);
+    void sendSms(String phone);
 
     FileUrlVO upload(MultipartFile file);
 }

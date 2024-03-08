@@ -53,17 +53,16 @@ public class CommonServiceImpl implements CommonService {
     private String bucketName;
 
     @Override
-    public String sendSms(String phone) {
+    public void sendSms(String phone) {
         if (!CommonUtils.checkPhone(phone)) {
             throw new ServerException(ErrorCode.PARAMS_ERROR);
         }
         int code = CommonUtils.generateCode();
         redisCache.set(RedisKeys.getSmsKey(phone), code, 60);
-        // boolean result = cloopenSendSms(phone, code, SmsTemplateEnum.LOGIN_CODE_TEMPLATE);
-        // if (result) {
-        //     log.info(" ============= 短信发送成功 ============= ");
-        // }
-        return String.valueOf(code);
+        boolean result = cloopenSendSms(phone, code, SmsTemplateEnum.LOGIN_CODE_TEMPLATE);
+        if (result) {
+            log.info(" ============= 短信发送成功 ============= ");
+        }
     }
 
     @Override
@@ -159,7 +158,6 @@ public class CommonServiceImpl implements CommonService {
                     Object object = data.get(key);
                     log.info(key + " = " + object);
                 }
-                log.info(" ============= 短信已经发送成功 ============= ");
             } else {
                 // 异常返回输出错误码和错误信息
                 log.error("错误码=" + result.get("statusCode") + " 错误信息= " + result.get("statusMsg"));

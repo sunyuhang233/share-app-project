@@ -26,8 +26,8 @@ public class CommonController {
     @Operation(summary = "发送短信")
     @PostMapping("/sendSms")
     public Result<Object> sendSms(@RequestParam("phone") String phone) {
-        String code = commonService.sendSms(phone);
-        return Result.ok(code);
+        commonService.sendSms(phone);
+        return Result.ok();
     }
 
     @PostMapping(value = "/upload/img")
